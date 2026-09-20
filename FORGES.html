@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+<body> V1.0.1 BETA
+
+<button id="tutorial" onclick="help()">How to play</button>
+
+<div>
+
+<button id="MNY">$0</button>
+
+<button id="HI" onclick="BYE()">0</button>
+
+<button id="COPZ" onclick="BYE()">0</button>
+
+<button id="COLZ" onclick="BYE()">0</button>
+
+<div id="KLN">
+
+<button id="IMPUT" onclick="input()">Kiln</button>
+
+<button id="ADCPR" onclick="adcopr()">0 copper in kiln</button>
+
+<button id="ADCL" onclick="adcoal()">0 coal in kiln</button>
+
+<button id="TEMP">Temperature 0°C</button>
+
+<button id="PTEMP" onclick="p100()">+ 100°C</button>
+
+<button id="MTEMP" onclick="m100()">- 100°C</button>
+
+<button id="start" onclick="strt()">Start</button>
+
+<div>
+<h1>Cruicible</h1>
+<button id=MOLTEN>EMPTY</button>
+
+<div>
+
+<button id="SELL" onclick="brtr()">Sell Molten Metals</button>
+
+<script>
+
+INFO = setInterval(information, 1)
+
+lifesave = setInterval(save, 50)
+
+setInterval(ORES, 9357)
+
+sell = setInterval(copr, 250)
+
+document.getElementById("ADCPR").style.display = "none";
+document.getElementById("ADCL").style.display = "none";
+document.getElementById("TEMP").style.display = "none";
+document.getElementById("PTEMP").style.display = "none";
+document.getElementById("MTEMP").style.display = "none";
+document.getElementById("start").style.display = "none";
+
+let kiln = {}
+kiln.on = false
+kiln.off = true
+kiln.open = true
+kiln.closed = false
+
+let coal = 0
+
+let copper = 0
+
+let incopper = 0
+
+let settemp = 0
+
+let temperature = 0
+
+let tluck = 0
+
+let ccost = 0
+
+let money = 0
+
+let bucket = {}
+bucket.mcopper = 0
+
+let cprs = 0
+
+function BYE() {
+let cluck = Math.floor(Math.random() * 5);
+let c0luck = Math.floor(Math.random() * 9);
+let luck = (cluck + c0luck)
+document.getElementById("HI").innerText = luck + " luck"
+copper = (copper + cluck)
+coal = (coal + c0luck)
+document.getElementById("COLZ").innerText = coal + " coal"
+document.getElementById("COPZ").innerText = copper + " copper"
+}
+
+function input() {
+if (kiln.off === true) {
+kiln.off = false
+kiln.on = true
+document.getElementById("ADCPR").style.display = "block";
+document.getElementById("ADCL").style.display = "block";
+document.getElementById("TEMP").style.display = "block";
+document.getElementById("PTEMP").style.display = "block";
+document.getElementById("MTEMP").style.display = "block";
+document.getElementById("start").style.display = "block";
+}
+else {
+kiln.on = false
+kiln.off = true
+document.getElementById("ADCPR").style.display = "none";
+document.getElementById("ADCL").style.display = "none";
+document.getElementById("TEMP").style.display = "none";
+document.getElementById("PTEMP").style.display = "none";
+document.getElementById("MTEMP").style.display = "none";
+document.getElementById("start").style.display = "none";
+}
+}
+
+function adcopr() {
+if (kiln.open === true) {
+if (copper >= 1) {
+copper = (copper - 1)
+incopper = (incopper + 1)
+}
+document.getElementById("ADCPR").innerText = incopper + " copper in kiln"
+document.getElementById("COLZ").innerText = coal + " coal"
+document.getElementById("COPZ").innerText = copper + " copper"
+}
+}
+
+function p100() {
+if (kiln.open === true) {
+if (settemp <= 900) {
+ccost = (ccost + 1)
+settemp = (settemp + 100)
+document.getElementById("TEMP").innerText = "Temperature " + settemp + "°C"
+}
+}
+}
+
+function m100() {
+if (settemp >= 100) {
+ccost = (ccost - 1)
+settemp = (settemp - 100)
+document.getElementById("TEMP").innerText = "Temperature " + settemp + "°C"
+}
+}
+
+function information() {
+if (settemp === 0) {
+document.getElementById("TEMP").innerText = "Set higher temperature."
+}
+}
+
+function strt() {
+if (kiln.open === true) {
+if (coal >= ccost) {
+if (settemp >= 100) {
+coal = (coal - ccost)
+document.getElementById("COLZ").innerText = coal + " coal"
+rice = setInterval(heat, 181)
+kiln.open = false
+kiln.closed = true
+}
+}
+}
+}
+
+function heat() {
+tluck = Math.floor(Math.random() * 15);
+temperature = (temperature + tluck)
+document.getElementById("start").innerText = temperature + "°C"
+if (temperature >= settemp) {
+clearInterval(rice)
+// here
+}
+}
+
+function ORES() {
+if (temperature >= 901) {
+if (incopper >= 1) {
+bucket.mcopper = (bucket.mcopper + (incopper * 100))
+incopper = 0
+document.getElementById("ADCPR").innerText = incopper + " copper in kiln"
+soliddy = setInterval(solidz, 65423)
+document.getElementById("MOLTEN").innerText = bucket.mcopper + "ml of copper"
+}
+}
+if (temperature >= settemp) {
+coold = setInterval(cool, 190)
+}
+}
+
+function solidz() {
+if (bucket.mcopper >= 1) {
+bucket.mcopper = 0
+document.getElementById("MOLTEN").innerText = "EMPTY"
+clearInterval(soliddy)
+}
+}
+
+function cool() {
+tluck = Math.floor(Math.random() * 7);
+temperature = (temperature - tluck)
+document.getElementById("start").innerText = temperature + "°C"
+if (temperature <= 15) {
+clearInterval(coold)
+if (temperature <= 15) {
+kiln.open = true
+document.getElementById("start").innerText = "Start"
+}
+}
+if (temperature <= 15) {
+clearInterval(coold)
+}
+}
+
+function help() {
+alert("Press any of the zeros to mine, any of them will work and then put some copper in the kiln, to start, it costs 1 coal per 100°C you set it to. (Set the temperature using the +100°C and the -100°C) Be aware that you will lose the molten copper if you wait too long, because it wont stay hot forever. If the copper disappears nothing else happens. Press the 'Kiln' button to toggle the kiln buttons. Click the sell molten ores button to sell your ores for money.")
+}
+
+function save() {
+if (temperature < 15) {
+temperature = 15
+}
+}
+
+function brtr() {
+money = (money + coprs)
+document.getElementById("MNY").innerText = "$" + money
+document.getElementById("MOLTEN").innerText = bucket.mcopper + "ml of copper"
+bucket.mcopper = 0
+}
+
+function copr() {
+coprs = (bucket.mcopper / 50)
+if (bucket.mcopper === 0) {
+document.getElementById("MOLTEN").innerText = EMPTY
+}
+}
+
+</script>
+
+</body>
+</html>
